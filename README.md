@@ -3,3 +3,4 @@
 #Rodríguez Sánchez Gladys Lizette 2014131117
 #Juárez Gabino César  2014090358
 #Ramírez Valdés Angel Eduardo
+#Gonzalez Sanchez Agustin 2014130526

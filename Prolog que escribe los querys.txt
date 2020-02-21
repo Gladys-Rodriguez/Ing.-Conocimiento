@@ -1,0 +1,24 @@
+
+Prolog:
+jproba:-write('{"jproba":'),arbol, write('}').
+ arbol:-write('{"nbarbol":"'),read(Nbarbol),write(Nbarbol),write('", "frecuencia":'),frecuencia(Nbarbol), write('}').
+ frecuencia(Nbarbol):-write('"select count(*) from '),write(Nbarbol),write(';"'),write(','),dimension(Nbarbol).
+ dimension(Nbarbol):-write('{"nbdimension":"'),read(Nbdimension),write(Nbdimension),write('",'),puerta(Nbarbol,Nbdimension).
+ puerta(Nbarbol,Nbdimension):-write('"select '),write(Nbdimension),write(', '),write('count(*)/(select count(*)from '),write(Nbarbol),write(') from '),write(Nbarbol),write(' where '),write(Nbdimension),write(' in(select distinct '),write(Nbdimension),write(' from '),write(Nbarbol),write(') group by '),write(Nbdimension),write(';",'),dimension2(Nbarbol,Nbdimension),write('}').
+ dimension2(Nbarbol,Nbdimension):-write('{nbdimension2":"'), read(Nbdimension2), write(Nbdimension2),write('",'),puerta2(Nbarbol,Nbdimension,Nbdimension2).
+ puerta2(Nbarbol,Nbdimension,Nbdimension2):-write('"select '),write(Nbdimension),write(', '),write(Nbdimension2),write(', '),
+ write('count(*)/(select count(*) from '),
+ write(Nbarbol),write(' where '),write(Nbdimension2),
+ write(' in (select distinct '),write(Nbdimension2),write(' from '),write(Nbarbol),write(') )  '),
+ write(' from '), write(Nbarbol),
+ write(' where '),write(Nbdimension),write(' in (select distinct '),write(Nbdimension),write(' from '),write(Nbarbol),
+ write(') group by '),write(Nbdimension),write(', '),write(Nbdimension2),write(';"'), write('}').
+ :-jproba.
+
+JSON:
+{"jproba":{"nbarbol":"empresas", "frecuencia":"select count(*) from empresas;",
+{"nbdimension":"materia","select materia, count(*)/(select count(*)from empresas) from empresas where materia in(
+select distinct materia from empresas) group by materia;",
+{nbdimension2":"ingenieria_del_conocimiento","select materia, ingenieria_del_conocimiento, count(*)/(select count(*) 
+from empresas where ingenieria_del_conocimiento in (select distinct ingenieria_del_conocimiento from empresas) )   
+from empresas where materia in (select distinct materia from empresas) group by materia, ingenieria_del_conocimiento;"}}}}

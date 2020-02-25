@@ -1,15 +1,28 @@
-https://rextester.com/WBAX69520
+https://rextester.com/PVMV31405
 
-jproba:-write('{"jproba":'),arbol, write('}').
- arbol:-write('{"nbarbol":"'),read(Nbarbol),write(Nbarbol),write('", "frecuencia":'),frecuencia(Nbarbol), write('}').
- frecuencia(Nbarbol):-write('"select count(*) from '),write(Nbarbol),write(';"'),write(','),dimension(Nbarbol).
- dimension(Nbarbol):-write('{"nbdimension":"'),read(Nbdimension),write(Nbdimension),write('",'),puerta(Nbarbol,Nbdimension).
- puerta(Nbarbol,Nbdimension):-write('"select '),write(Nbdimension),write(', '),write('count(*)/(select count(*)from '),write(Nbarbol),write(') from '),write(Nbarbol),write(' where '),write(Nbdimension),write(' in(select distinct '),write(Nbdimension),write(' from '),write(Nbarbol),write(') group by '),write(Nbdimension),write(';"'),write(','),dimension2(Nbarbol,Nbdimension).
- dimension2(Nbarbol,Nbdimension):-write('{"nbdimension2":"'),read(Nbdimension2),write(Nbdimension2),write('",'),puerta2(Nbarbol,Nbdimension,Nbdimension2).
- puerta2(Nbarbol,Nbdimension,Nbdimension2):-write('"select '),write(Nbdimension2),write(','),write(Nbdimension),write(', '),write('count(*)/(select count(*)from '),write(Nbarbol),write(') from '),write(Nbarbol),write(' where '),write(Nbdimension),write(' in(select distinct '),write(Nbdimension),write(' from '),write(Nbarbol),write(') and '),write(Nbdimension2),write(' in(select distinct '),write(Nbdimension2),write(' from '),write(Nbarbol),write(') group by '),write(Nbdimension),write(','),write(Nbdimension2),write(' order by '),write(Nbdimension),write(';"').
- :-jproba.
+jproba:-write('{"jproba":'),arbol.
+arbol:-write('"nbarbol":'),read(X),write(X),write('",'),dimension.
+dimension:-write('"dimension":{"nbdimension":'),read(X),write(X),write('",'),valores.
+valores:-write('['),read(X),(X='valor'->valor; (X='findimension'->write(']'))).
+valor:-write('"valor":{"nbvalor":'),read(X),write(X),write('", "proba":'),read(Y),write(Y),write('}'),a1.
+a1:-read(X),(X='valor'->(write(','),valor); (X='dimension'->dimension;(X='findimension'->write('}')))).
+:-jproba.
 
 INGRESAR:
-empresas.
-materia.
+arbolDproba.
+mercado.
+valor.
+pais1.
+0.25.
+dimension.
 industria.
+valor.
+a.
+0.35.
+valor.
+b.
+0.15.
+valor.
+c.
+0.5.
+findimension.

@@ -15,10 +15,3 @@ jproba:-write('{"jproba":'),arbol, write('}').
  write(') group by '),write(Nbdimension),write(', '),write(Nbdimension2),write(';"'), write('}').
  :-jproba.
 
-JSON:
-{"jproba":{"nbarbol":"empresas", "frecuencia":"select count(*) from empresas;",
-{"nbdimension":"materia","select materia, count(*)/(select count(*)from empresas) from empresas where materia in(
-select distinct materia from empresas) group by materia;",
-{nbdimension2":"ingenieria_del_conocimiento","select materia, ingenieria_del_conocimiento, count(*)/(select count(*) 
-from empresas where ingenieria_del_conocimiento in (select distinct ingenieria_del_conocimiento from empresas) )   
-from empresas where materia in (select distinct materia from empresas) group by materia, ingenieria_del_conocimiento;"}}}}
